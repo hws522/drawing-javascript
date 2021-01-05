@@ -1,28 +1,50 @@
 const canvas = document.getElementById("jsCanvas");
+const ctx = canvas.getContext("2d");
+const color = document.getElementsByClassName("jsColor");
+
+canvas.width = 650; //element에 width, height 를 지정해줘야 됨.
+canvas.height = 650;
+
+ctx.strokeStyle = "#2c2c2c";
+ctx.lineWidth = 2.5;
+
+
 
 let painting = false;
+
+function startPainting(){
+    painting = true;
+}
+
+function stopPainting(){
+    painting = false;
+}
 
 function onMouseMove(event){ //스크린 내에서의 좌표.(offsetX, offsetY)
     const x = event.offsetX;
     const y = event.offsetY;
+
+    if(!painting){ //클릭 x.
+        ctx.beginPath();
+        ctx.moveTo(x, y); 
+    }
+    else{ // 클릭 o.
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
 }
 
-function onMouseDown(event){
-    painting = true;
+function handleColor(event){
+    const color = event.target.style.backgroundColor; //target 색상을 color 지정해서 strokestyle 색상으로 바꿈.
+    ctx.strokeStyle = color;
 }
 
-function onMouseUp(event){
-    painting = false;
-}
-
-function onMouseLeave(event){
-    painting = false;
-}
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mousedown", onMouseDown);
-    canvas.addEventListener("mouseup", onMouseUp);
-    canvas.addEventListener("mouseleave", onMouseLeave);
+    canvas.addEventListener("mousedown", startPainting);
+    canvas.addEventListener("mouseup", stopPainting);
+    canvas.addEventListener("mouseleave", stopPainting);
 }
 
+Array.from(color).forEach(color => color.addEventListener("click", handleColor));
