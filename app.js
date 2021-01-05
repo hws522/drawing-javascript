@@ -3,11 +3,16 @@ const ctx = canvas.getContext("2d");
 const color = document.getElementsByClassName("jsColor");
 const range = document.getElementById("jsRange");
 const mode = document.getElementById("jsMode");
+const save = document.getElementById("jsSave");
 
 
 
 canvas.width = 650; //element에 width, height 를 지정해줘야 됨.
 canvas.height = 650;
+
+ctx.fillStyle = "white"; //기본 배경 흰색 지정. 안해놓으면 투명배경됨.
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
 
 ctx.strokeStyle = "#2c2c2c";
 ctx.fillStyle = "#2c2c2c";
@@ -69,6 +74,18 @@ function handleCanvas(){
     }
 }
 
+function handleRightClick(event){
+    event.preventDefault(); // 우클릭방지.
+}
+
+function handleSave(){
+    const image = canvas.toDataURL(); //defalt png 저장.
+    const link = document.createElement("a");
+    link.href = image;
+    link.download = "drawing image🎨";
+    link.click();
+}
+
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
@@ -76,6 +93,7 @@ if(canvas){
     canvas.addEventListener("mouseup", stopPainting);
     canvas.addEventListener("mouseleave", stopPainting);
     canvas.addEventListener("click", handleCanvas);
+    canvas.addEventListener("contextmenu", handleRightClick); 
 }
 
 //array 만들고 forEach로 color(아무이름이나 노상관. array안에 item 이름) 돌려서 click 이벤트 호출
@@ -87,4 +105,8 @@ if(range){
 
 if(mode){
     mode.addEventListener("click", handleMode);
+}
+
+if(save){
+    save.addEventListener("click", handleSave);
 }
