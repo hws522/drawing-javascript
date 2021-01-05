@@ -6,6 +6,9 @@
 
 <img src="https://user-images.githubusercontent.com/59306143/103662936-dcf95480-4fb3-11eb-9135-80c0835e59a5.gif" alt="ezgif com-gif-maker" width="600" height="400"/>
 
+<img src="https://user-images.githubusercontent.com/59306143/103665979-64949280-4fb7-11eb-851c-419d9a33c9f2.gif
+" width="600" height="400"/>
+
 ### explanation
 
 - html5 canvasAPI 를 이용했습니다.
