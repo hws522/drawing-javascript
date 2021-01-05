@@ -1,6 +1,9 @@
 const canvas = document.getElementById("jsCanvas");
 const ctx = canvas.getContext("2d");
 const color = document.getElementsByClassName("jsColor");
+const range = document.getElementById("jsRange");
+
+
 
 canvas.width = 650; //element에 width, height 를 지정해줘야 됨.
 canvas.height = 650;
@@ -39,6 +42,11 @@ function handleColor(event){
     ctx.strokeStyle = color;
 }
 
+function handleRange(event){
+    const range = event.target.value;
+    ctx.lineWidth = range;
+}
+
 
 if(canvas){
     canvas.addEventListener("mousemove", onMouseMove);
@@ -49,3 +57,7 @@ if(canvas){
 
 //array 만들고 forEach로 color(아무이름이나 노상관. array안에 item 이름) 돌려서 click 이벤트 호출
 Array.from(color).forEach(color => color.addEventListener("click", handleColor));
+
+if(range){
+    range.addEventListener("input", handleRange);
+}
