@@ -47,4 +47,5 @@ if(canvas){
     canvas.addEventListener("mouseleave", stopPainting);
 }
 
+//array 만들고 forEach로 color(아무이름이나 노상관. array안에 item 이름) 돌려서 click 이벤트 호출
 Array.from(color).forEach(color => color.addEventListener("click", handleColor));
